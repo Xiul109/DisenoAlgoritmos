@@ -53,5 +53,27 @@ public class StateSpace {
 		}
 		return succ;
 	}
+	public List<List<Integer>> anteccessors(List<Integer> state,List<Integer> baseState){
+		List<List<Integer>> ant= new ArrayList<List<Integer>>();
+		List<Integer> auxState;
+		int val;
+		for(int i=0;i<state.size();i++){
+			val=state.get(i);
+			while(val<baseState.get(i)){
+				auxState=new ArrayList<Integer>(state);
+				auxState.set(i, val++);
+				ant.add(auxState);
+			}
+		}
+		if(state.size()<baseState.size()){
+			int maxVal=baseState.get(baseState.size()-1);
+			for(int i=0;i<=max){
+				
+			}
+		}
+		
+		
+		return ant;
+	}
 	
 }

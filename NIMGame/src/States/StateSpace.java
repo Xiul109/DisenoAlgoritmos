@@ -52,26 +52,24 @@ public class StateSpace {
 		}
 		return succ;
 	}
-	public List<List<Integer>> anteccessors(List<Integer> state,List<Integer> baseState){
-		List<List<Integer>> ant= new ArrayList<List<Integer>>();
-		List<Integer> auxState;
-		int val, maxVal=baseState.get(baseState.size()-1);;
-		for(int i=0;i<state.size();i++){
+	public List<State> anteccessors(State state,State baseState){
+		int val, maxVal;
+		List<State> ant= new ArrayList<State>();
+		List<State> prev=new ArrayList<State>();
+		State auxState;
+		for (int i=0;i<baseState.len();i++){
 			val=state.get(i);
-			while(val<=maxVal){
-				auxState=new ArrayList<Integer>(state);
-				auxState.set(i, val++);
-				ant.add(auxState);
+			maxVal=baseState.get(i);
+			while (val++<maxVal){
+				auxState=new State(state);
+				auxState.set(i, val);
+				auxState.sort();
+				if (!prev.contains(auxState)){
+					ant.add(auxState);
+					prev.add(auxState);
+				}
 			}
 		}
-//		if(state.size()<baseState.size()){
-//			int maxVal=baseState.get(baseState.size()-1);
-//			for(int i=0;i<=max){
-//				
-//			}
-//		}
-		
-		
 		return ant;
 	}
 	

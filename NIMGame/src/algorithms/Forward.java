@@ -5,13 +5,14 @@ import java.util.List;
 
 import States.State;
 import States.StateSpace;
+import States.StateValTuple;
 
 public class Forward {
 	private StateSpace stateSpace;
 	public Forward(State baseState){
 		stateSpace=new StateSpace(baseState);
 	}
-	public State getNextMove(State baseState){
+	public StateValTuple getNextMove(State baseState){
 		int auxVal, val=0;
 		boolean found=false;
 		List<State> stateList=new ArrayList<State>();
@@ -19,7 +20,6 @@ public class Forward {
 		State ini=new State(baseState.len());
 		State mov=null;
 		baseState.sort();
-		stateSpace.setLose(ini);
 		stateList.add(ini);
 		while (!stateList.isEmpty() && !found) {
 			State s = stateList.remove(0);
@@ -29,6 +29,7 @@ public class Forward {
 				mov = s;
 				if (val == -1) {
 					found = true;
+					val=1;
 				}
 			} else {
 				for (State next : ant) {
@@ -42,6 +43,6 @@ public class Forward {
 			}
 			stateList.addAll(ant);
 		}
-		return mov;
+		return new StateValTuple(mov,val);
 	}
 }

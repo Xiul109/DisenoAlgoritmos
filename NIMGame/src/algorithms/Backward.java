@@ -5,13 +5,14 @@ import java.util.List;
 
 import States.State;
 import States.StateSpace;
+import States.StateValTuple;
 
 public class Backward {
 	private StateSpace stateSpace;
 	public Backward(State initialState){
 		stateSpace=new StateSpace(initialState);
 	}
-	public State getNextMove(State initialState){
+	public StateValTuple getNextMove(State initialState){
 		State succ=null;
 		List<State> successors =stateSpace.successors(initialState);
 		int succVal,val=-1;
@@ -22,7 +23,7 @@ public class Backward {
 				succVal=getNextMoveVal(stateSpace, succ);
 			if(succVal<0) val=1;
 		}
-		return succ;
+		return new StateValTuple(succ,val);
 	}
 	private int getNextMoveVal(StateSpace stateSpace, State  state){
 		int succVal,val=-1;

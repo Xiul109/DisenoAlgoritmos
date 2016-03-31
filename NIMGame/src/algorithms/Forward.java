@@ -19,10 +19,11 @@ public class Forward {
 		List<State> ant=new ArrayList<State>();
 		State ini=new State(baseState.len());
 		State mov=null;
+		State s=null;
 		baseState.sort();
 		stateList.add(ini);
 		while (!stateList.isEmpty() && !found) {
-			State s = stateList.remove(0);
+			s = stateList.remove(0);
 			val = stateSpace.getVal(s);
 			ant = stateSpace.anteccessors(s, baseState);
 			if (ant.contains(baseState)) {
@@ -36,13 +37,15 @@ public class Forward {
 					auxVal = stateSpace.getVal(next);
 					if (val == 1 && auxVal == 0) {
 						stateSpace.setLose(next);
+						stateList.add(next);
 					} else if (val == -1 && (auxVal == 0 || auxVal == -1)) {
 						stateSpace.setWin(next);
+						stateList.add(next);
 					}
 				}
 			}
-			stateList.addAll(ant);
 		}
+		if (!found) val=-1;
 		return new StateValTuple(mov,val);
 	}
 }

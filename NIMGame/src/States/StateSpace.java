@@ -58,19 +58,20 @@ public class StateSpace {
 		List<State> prev=new ArrayList<State>();
 		State auxState;
 		for (int i=0;i<baseState.len();i++){
-			val=state.get(i);
-			maxVal=baseState.get(i);
-			while (val++<maxVal){
-				auxState=new State(state);
-				auxState.set(i, val);
-				auxState.sort();
-				if (!prev.contains(auxState)){
-					ant.add(auxState);
-					prev.add(auxState);
+			for (int j=0;j<baseState.len();j++){
+				val=state.get(i);
+				maxVal=baseState.get(j);
+				while (val++<maxVal){
+					auxState=new State(state);
+					auxState.set(i, val);
+					auxState.sort();
+					if (!prev.contains(auxState)){
+						ant.add(auxState);
+						prev.add(auxState);
+					}
 				}
 			}
 		}
 		return ant;
 	}
-	
 }

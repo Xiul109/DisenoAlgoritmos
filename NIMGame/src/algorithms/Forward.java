@@ -32,16 +32,15 @@ public class Forward {
 					found = true;
 					val=1;
 				}
-			} else {
-				for (State next : ant) {
-					auxVal = stateSpace.getVal(next);
-					if (val == 1 && auxVal == 0) {
-						stateSpace.setLose(next);
-						stateList.add(next);
-					} else if (val == -1 && (auxVal == 0 || auxVal == -1)) {
-						stateSpace.setWin(next);
-						stateList.add(next);
-					}
+			}
+			for (State next : ant) {
+				auxVal = stateSpace.getVal(next);
+				if (val == 1 && auxVal == 0) {
+					stateSpace.setLose(next);
+					stateList.add(next);
+				} else if (val == -1 && (auxVal == 0 || auxVal == -1)) {
+					stateSpace.setWin(next);
+					stateList.add(next);
 				}
 			}
 		}

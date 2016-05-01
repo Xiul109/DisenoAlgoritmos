@@ -69,28 +69,10 @@ public class Simulation {
 		}
 		return successes;
 	}
-	public static double[] confidenceInterval(int n,int simulations,int wide,int height, int[] pub, int[][] houses, double p){
-		int[] successes=new int[n];
-		for(int i=0;i<n;i++){
-			successes[i]=runSimulations(simulations, wide, height, pub, houses, p);
-		}
-		double aver= average(successes);
-		double quasi= quasivariance(successes, aver);
-		double v=1.96*quasi/Math.sqrt(successes.length);
+	public static double[] confidenceInterval(int simulations,int wide,int height, int[] pub, int[][] houses, double prob){
+		double p=runSimulations(simulations, wide, height, pub, houses, prob)/(double) simulations;
+		double v=1.96*Math.sqrt(p*(1-p)/simulations);
 		
-		return new double[]{aver-v,aver+v};
-	}
-	private static double average(int[] successes){
-		double sum=0;
-		for(int n:successes)
-			sum+=n;
-		return sum /successes.length;
-	}
-	private static double quasivariance(int[] successes, double average){
-		double s=0;
-		for(int x=0;x<successes.length;x++){
-		s+=Math.pow(successes[x]-average,2);
-		}
-		return Math.sqrt(s/(successes.length-1));
+		return new double[]{p-v,p+v};
 	}
 }

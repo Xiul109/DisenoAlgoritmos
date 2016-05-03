@@ -8,6 +8,7 @@ public class BoyerMoore implements PatternAlgorithm {
 	private HashMap<Character, Integer> badsufix;
 	public BoyerMoore(String patron){
 		this.patron=patron;
+		badsufix=new HashMap<Character, Integer>();
 		iniciaOcc();
 		f=new int [patron.length()+1];
 		s=new int [patron.length()+1];
@@ -35,10 +36,11 @@ public class BoyerMoore implements PatternAlgorithm {
 	}
 
 	private void iniciaOcc() {
-		for (int n = patron.length() - 1; n >= 0; n--)
+		for (int n = patron.length() - 1; n >= 0; n--){
 			if (!badsufix.containsKey(patron.charAt(n))) {
 				badsufix.put(patron.charAt(n),n);
 			}
+		}
 	}
 	
 	private void preproceso1() {

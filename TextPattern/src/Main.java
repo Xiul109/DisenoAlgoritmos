@@ -17,7 +17,7 @@ public class Main {
 				patron=args[1];
 				System.out.println(nFichero+" "+patron);
 				Scanner scan=new Scanner(new File(nFichero));
-				texto = scan.next();
+				texto = scan.useDelimiter("\0").next();
 				scan.close();
 			} catch (IOException e) {
 				fin=true;
@@ -26,34 +26,35 @@ public class Main {
 			
 		}
 		if(!fin){
+			int porcentaje=100;
 			Exec ex=new Exec(texto);
 			long t1,t2;
 			int ocurs;
 			
-			t1=System.currentTimeMillis();
-			ocurs=ex.ocurrencia(Algorithm.NAIVE, 100, patron);
-			t2=System.currentTimeMillis();
+			t1=System.nanoTime();
+			ocurs=ex.ocurrencia(Algorithm.NAIVE, porcentaje, patron);
+			t2=System.nanoTime();
 			System.out.println("Se han encontrado "+ocurs+" ocurrencias");
 			System.out.println("Algoritmo: Fuerza bruta");
 			System.out.println("Tiempo: "+(t2-t1));
 			
-			t1=System.currentTimeMillis();
-			ocurs=ex.ocurrencia(Algorithm.BOYERMOORE, 100, patron);
-			t2=System.currentTimeMillis();
+			t1=System.nanoTime();
+			ocurs=ex.ocurrencia(Algorithm.BOYERMOORE, porcentaje, patron);
+			t2=System.nanoTime();
 			System.out.println("Se han encontrado "+ocurs+" ocurrencias");
 			System.out.println("Algoritmo: BoyerMoore");
 			System.out.println("Tiempo: "+(t2-t1));
 			
-			t1=System.currentTimeMillis();
-			ocurs=ex.ocurrencia(Algorithm.KNUTH, 100, patron);
-			t2=System.currentTimeMillis();
+			t1=System.nanoTime();
+			ocurs=ex.ocurrencia(Algorithm.KNUTH, porcentaje, patron);
+			t2=System.nanoTime();
 			System.out.println("Se han encontrado "+ocurs+" ocurrencias");
 			System.out.println("Algoritmo: Knuth");
 			System.out.println("Tiempo: "+(t2-t1));
 			
-			t1=System.currentTimeMillis();
-			ocurs=ex.ocurrencia(Algorithm.KARP, 100, patron);
-			t2=System.currentTimeMillis();
+			t1=System.nanoTime();
+			ocurs=ex.ocurrencia(Algorithm.KARP, porcentaje, patron);
+			t2=System.nanoTime();
 			System.out.println("Se han encontrado "+ocurs+" ocurrencias");
 			System.out.println("Algoritmo: Karp");
 			System.out.println("Tiempo: "+(t2-t1));

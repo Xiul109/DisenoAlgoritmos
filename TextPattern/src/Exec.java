@@ -5,16 +5,15 @@ import patternSearching.Naive;
 import patternSearching.PatternAlgorithm;
 
 public class Exec {
-	private String texto;
+	private String[] lineas;
 	
 	public Exec(String texto){
-		this.texto=texto;
+		lineas=texto.split("\n");
 	}
 	public int ocurrencia(int algoritmo, int porcentaje, String patron){
 		int saltos=100/porcentaje;
 		int ocurrencias=0;
 		PatternAlgorithm algo;
-		String[] lineas=patron.split("\n");
 		switch (algoritmo) {
 		case Algorithm.BOYERMOORE:
 			algo = new BoyerMoore(patron);
